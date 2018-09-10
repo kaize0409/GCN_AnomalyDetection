@@ -18,10 +18,10 @@ def get_placeholder():
 
 def get_model(model_str, placeholders, num_features, num_nodes, features_nonzero):
     model = None
-    if model_str == 'arga_ae':
+    if model_str == 'gcn_ae':
         model = GCNModelAE(placeholders, num_features, features_nonzero)
 
-    elif model_str == 'arga_vae':
+    elif model_str == 'gcn_vae':
         model = GCNModelVAE(placeholders, num_features, num_nodes, features_nonzero)
 
     return model
