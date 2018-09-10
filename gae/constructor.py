@@ -26,16 +26,14 @@ def get_model(model_str, placeholders, num_features, num_nodes, features_nonzero
 
     return model
 
-def get_optimizer(model_str, model, placeholders, pos_weight, norm, num_nodes):
+def get_optimizer(model_str, model, placeholders, num_nodes):
     if model_str == 'gcn_ae':
         opt = OptimizerAE(preds=model.reconstructions,
                           labels=placeholders['features'])
     elif model_str == 'gcn_vae':
         opt = OptimizerVAE(preds=model.reconstructions,
                            labels=placeholders['features'],
-                           model=model, num_nodes=num_nodes,
-                           pos_weight=pos_weight,
-                           norm=norm)
+                           model=model, num_nodes=num_nodes)
     return opt
 
 def update(model, opt, sess, adj_norm, adj_label, features, placeholders, adj):
