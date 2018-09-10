@@ -50,4 +50,4 @@ class AnomalyDetectionRunner():
         sorted_errors = np.argsort(-reconstruction_errors, axis=0)
         with open('ranking.txt', 'w') as f:
             for index in sorted_errors:
-                f.write("%s\n" % feas['labels'][index])
+                f.write("%s\n" % feas['labels'][index][0])
