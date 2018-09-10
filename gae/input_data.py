@@ -73,12 +73,13 @@ def format_data(data_source):
     items = [adj, num_features, num_nodes, features_nonzero, adj_norm, adj_label, features]
     feas = {}
     for item in items:
-        # item_name = [ k for k,v in locals().iteritems() if v == item][0]
-        feas[retrieve_name(item)] = item
+        # item_name = [ k for k,v in locals().iteritems() if v == item][0]]
+        item_name = retrieve_name(item)
+        feas[item_name] = item
 
     return feas
 
 def retrieve_name(var):
     callers_local_vars = inspect.currentframe().f_back.f_locals.items()
-    return [var_name for var_name, var_val in callers_local_vars if var_val is var][0]
+    return [var_name for var_name, var_val in callers_local_vars if var_val is var and "item" not in var_name][0]
 
