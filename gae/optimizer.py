@@ -10,9 +10,9 @@ class OptimizerAE(object):
 
         # reconstruction loss
         diff = tf.square(preds - labels)
-        self.reconstruction_errors = tf.reduce_mean(diff, 1)
+        self.reconstruction_errors = tf.reduce_sum(diff, 1)
         # self.reconstruction_errors =  tf.losses.mean_squared_error(labels= labels, predictions=preds)
-        self.cost = tf.reduce_sum(self.reconstruction_errors)
+        self.cost = tf.reduce_mean(self.reconstruction_errors)
 
         self.optimizer = tf.train.AdamOptimizer(learning_rate=FLAGS.learning_rate)  # Adam Optimizer
 
