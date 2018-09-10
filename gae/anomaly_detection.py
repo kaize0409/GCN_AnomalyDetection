@@ -48,6 +48,6 @@ class AnomalyDetectionRunner():
             print("Epoch:", '%04d' % (epoch + 1), "train_loss=", "{:.5f}".format(reconstruction_loss))
 
         sorted_errors = np.argsort(-reconstruction_errors, axis=0)
-        with open('ranking.txt', 'w') as f:
+        with open('{}-ranking.txt'.format(self.data_name), 'w') as f:
             for index in sorted_errors:
                 f.write("%s\n" % feas['labels'][index][0])
