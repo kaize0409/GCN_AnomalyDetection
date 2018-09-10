@@ -47,8 +47,7 @@ class AnomalyDetectionRunner():
             reconstruction_errors, reconstruction_loss = update(gcn_model, opt, sess, feas['adj_norm'], feas['adj_label'], feas['features'], placeholders, feas['adj'])
             print("Epoch:", '%04d' % (epoch + 1), "train_loss=", "{:.5f}".format(reconstruction_loss))
 
-            sorted_errors = np.argsort(-reconstruction_errors, axis=0)
-
-            with open('ranking.txt', 'w') as f:
-                for index in sorted_errors:
-                    f.write("%s\n" % feas['labels'][index])
+        sorted_errors = np.argsort(-reconstruction_errors, axis=0)
+        with open('ranking.txt', 'w') as f:
+            for index in sorted_errors:
+                f.write("%s\n" % feas['labels'][index])
