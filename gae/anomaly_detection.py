@@ -30,7 +30,7 @@ class AnomalyDetectionRunner():
         placeholders = get_placeholder()
 
         # construct model
-        d_real, discriminator, gcn_model = get_model(model_str, placeholders, feas['num_features'], feas['num_nodes'], feas['features_nonzero'])
+        gcn_model = get_model(model_str, placeholders, feas['num_features'], feas['num_nodes'], feas['features_nonzero'])
 
         # Optimizer
         opt = get_optimizer(model_str, gcn_model, placeholders, feas['pos_weight'], feas['norm'], feas['num_nodes'])
