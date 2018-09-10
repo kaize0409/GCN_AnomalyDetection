@@ -42,10 +42,10 @@ def parse_index_file(filename):
 #     return adj, features
 
 def load_data(data_source):
-    data = scipy.io.loadmat("data/{}_final.mat".format(data_source))
+    data = scipy.io.loadmat("data/{}_test_final.mat".format(data_source))
     labels = data["Label"]
     attributes = sp.csr_matrix(data["Attributes"])
-    network = sp.lil_matrix(["Network"])
+    network = sp.lil_matrix(data["Network"])
 
     return network, attributes, labels
 
@@ -54,10 +54,9 @@ def format_data(data_source):
     adj, features, labels = load_data(data_source)
 
     # Store original adjacency matrix (without diagonal entries) for later
-    adj_orig = adj
-    adj_orig = adj_orig - sp.dia_matrix((adj_orig.diagonal()[np.newaxis, :], [0]), shape=adj_orig.shape)
-    adj_orig.eliminate_zeros()
-
+    # adj_orig = adj
+    # adj_orig = adj_orig - sp.dia_matrix((adj_orig.diagonal()[np.newaxis, :], [0]), shape=adj_orig.shape)
+    # adj_orig.eliminate_zeros()
     # adj = adj_orig
 
     if FLAGS.features == 0:
@@ -74,7 +73,7 @@ def format_data(data_source):
 
     adj_label = adj + sp.eye(adj.shape[0])
     adj_label = sparse_to_tuple(adj_label)
-    items = [adj, adj_orig, num_features, num_nodes, features_nonzero, adj_norm, adj_label, features]
+    items = [adj, num_features, num_nodes, features_nonzero, adj_norm, adj_label, features]
     feas = {}
     for item in items:
         # item_name = [ k for k,v in locals().iteritems() if v == item][0]
