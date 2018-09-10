@@ -28,7 +28,7 @@ def get_model(model_str, placeholders, num_features, num_nodes, features_nonzero
 
 def get_optimizer(model_str, model, placeholders, num_nodes):
     if model_str == 'gcn_ae':
-        opt = OptimizerAE(preds=model.reconstructions,
+        opt = OptimizerAE(preds=tf.sparse_tensor_to_dense(model.reconstructions),
                           labels=placeholders['features'])
     elif model_str == 'gcn_vae':
         opt = OptimizerVAE(preds=model.reconstructions,
