@@ -1,9 +1,6 @@
 import tensorflow as tf
-import numpy as np
 from model import GCNModelAE, GCNModelVAE
 from optimizer import OptimizerAE, OptimizerVAE
-import scipy.sparse as sp
-import inspect
 from preprocessing import construct_feed_dict
 flags = tf.app.flags
 FLAGS = flags.FLAGS
