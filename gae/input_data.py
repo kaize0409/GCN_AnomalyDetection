@@ -70,7 +70,7 @@ def format_data(data_source):
 
     adj_label = adj + sp.eye(adj.shape[0])
     adj_label = sparse_to_tuple(adj_label)
-    items = [adj, num_features, num_nodes, features_nonzero, adj_norm, adj_label, features]
+    items = [adj, num_features, num_nodes, features_nonzero, adj_norm, adj_label, features, labels]
     feas = {}
     for item in items:
         # item_name = [ k for k,v in locals().iteritems() if v == item][0]]

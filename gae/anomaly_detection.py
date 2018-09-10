@@ -51,4 +51,4 @@ class AnomalyDetectionRunner():
 
             with open('ranking.txt', 'w') as f:
                 for index in sorted_errors:
-                    f.write("%s\n" % reconstruction_errors[index[0]])
+                    f.write("%s\n" % feas['labels'][index])
