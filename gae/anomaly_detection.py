@@ -6,7 +6,7 @@ os.environ['CUDA_VISIBLE_DEVICES'] = ""
 
 import tensorflow as tf
 from constructor import get_placeholder, get_model, get_optimizer, update
-# from evaluation import linkpred_metrics
+import numpy as np
 from input_data import format_data
 
 # Settings
@@ -46,3 +46,9 @@ class AnomalyDetectionRunner():
 
             reconstruction_errors, reconstruction_loss = update(gcn_model, opt, sess, feas['adj_norm'], feas['adj_label'], feas['features'], placeholders, feas['adj'])
             print("Epoch:", '%04d' % (epoch + 1), "train_loss=", "{:.5f}".format(reconstruction_loss))
+
+            sorted_errors = np.argsort(-reconstruction_errors, axis=0)
+
+            with open('ranking.txt', 'w') as f:
+                for index in sorted_errors:
+                    f.write("%s\n" % reconstruction_errors[index[0]])
