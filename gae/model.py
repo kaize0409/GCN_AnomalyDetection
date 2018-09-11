@@ -79,7 +79,7 @@ class GCNModelAE(Model):
         self.decoder_layer2 = GraphConvolution(input_dim=FLAGS.hidden1,
                                                output_dim=self.input_dim,
                                                adj=self.adj,
-                                               act=tf.nn.relu,
+                                               act=tf.nn.sigmoid,
                                                dropout=self.dropout,
                                                logging=self.logging)(self.decoder_layer1)
         self.reconstructions = self.decoder_layer2
