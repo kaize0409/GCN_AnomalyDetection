@@ -7,7 +7,6 @@ FLAGS = flags.FLAGS
 class OptimizerAE(object):
     def __init__(self, preds, labels):
 
-
         # reconstruction loss
         diff = tf.square(preds - labels)
         self.reconstruction_errors = tf.reduce_sum(diff, 1)
@@ -15,7 +14,6 @@ class OptimizerAE(object):
         self.cost = tf.reduce_mean(self.reconstruction_errors)
 
         self.optimizer = tf.train.AdamOptimizer(learning_rate=FLAGS.learning_rate)  # Adam Optimizer
-
         self.opt_op = self.optimizer.minimize(self.cost)
         # self.grads_vars = self.optimizer.compute_gradients(self.cost)
 
