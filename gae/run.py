@@ -15,7 +15,7 @@ flags.DEFINE_float('weight_decay', 0., 'Weight for L2 loss on embedding matrix.'
 flags.DEFINE_float('dropout', 0., 'Dropout rate (1 - keep probability).')
 flags.DEFINE_integer('features', 1, 'Whether to use features (1) or not (0).')
 flags.DEFINE_integer('seed', 50, 'seed for fixing the results.')
-flags.DEFINE_integer('iterations', 100, 'number of iterations.')
+flags.DEFINE_integer('iterations', 200, 'number of iterations.')
 
 
 '''
@@ -26,7 +26,8 @@ seed = 7
 np.random.seed(seed)
 tf.set_random_seed(seed)
 
-dataname = 'Enron'       # 'cora' or 'citeseer' or 'pubmed'
+data_list = ['BlogCatalog', 'Flickr']
+dataname = data_list[0]       # 'cora' or 'citeseer' or 'pubmed'
 model = 'gcn_ae'          # 'arga_ae' or 'arga_vae'
 task = 'anomaly_detection'         # 'clustering' or 'link_prediction'
 settings = {'data_name': dataname, 'iterations' : FLAGS.iterations, 'model' : model}
