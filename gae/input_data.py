@@ -40,7 +40,7 @@ def parse_index_file(filename):
 
 
 def load_data(data_source):
-    data = scipy.io.loadmat("data/{}_test_final.mat".format(data_source))
+    data = scipy.io.loadmat("data/{}.mat".format(data_source))
     labels = data["Label"]
     attributes = sp.csr_matrix(data["Attributes"])
     network = sp.lil_matrix(data["Network"])
