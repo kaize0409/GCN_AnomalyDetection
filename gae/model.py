@@ -76,7 +76,7 @@ class GCNModelAE(Model):
                                            dropout=self.dropout,
                                            logging=self.logging)(self.embeddings)
 
-        self.decoder_layer2 = FullyConnectedDecoder(input_dim=FLAGS.hidden1,
+        self.decoder_layer2 = GraphConvolution(input_dim=FLAGS.hidden1,
                                                output_dim=self.input_dim,
                                                adj=self.adj,
                                                act=tf.nn.relu,

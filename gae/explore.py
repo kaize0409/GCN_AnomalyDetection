@@ -37,9 +37,9 @@ def pre_process(data_source):
         if label[0] == 1:
             count += 1
 
-    min_max_scaler = preprocessing.MinMaxScaler()
-    new_attributes = min_max_scaler.fit_transform(attributes)
-
+    # min_max_scaler = preprocessing.MinMaxScaler()
+    # new_attributes = min_max_scaler.fit_transform(attributes)
+    new_attributes = preprocessing.normalize(attributes, norm='l2', axis=0)
 
     newdata = dict()
     newdata["Label"] = labels
