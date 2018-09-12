@@ -69,7 +69,7 @@ class GCNModelAE(Model):
         # self.z_mean = self.embeddings
 
         # decoder
-        self.decoder_layer1 = FullyConnectedDecoder(input_dim=FLAGS.hidden2,
+        self.decoder_layer1 = GraphConvolution(input_dim=FLAGS.hidden2,
                                            output_dim=FLAGS.hidden1,
                                            adj=self.adj,
                                            act=tf.nn.relu,
@@ -79,7 +79,7 @@ class GCNModelAE(Model):
         self.decoder_layer2 = FullyConnectedDecoder(input_dim=FLAGS.hidden1,
                                                output_dim=self.input_dim,
                                                adj=self.adj,
-                                               act=tf.nn.sigmoid,
+                                               act=tf.nn.relu,
                                                dropout=self.dropout,
                                                logging=self.logging)(self.decoder_layer1)
         self.reconstructions = self.decoder_layer2
