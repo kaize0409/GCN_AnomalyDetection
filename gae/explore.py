@@ -24,13 +24,13 @@ def process_attribute(data_source):
 
 def pre_process(data_source):
     data = scipy.io.loadmat("raw_data/{}.mat".format(data_source))
-    # labels = data["gnd"]
-    # network = data["A"]
-    # attributes = data["X"]
+    labels = data["gnd"]
+    network = data["A"]
+    attributes = data["X"]
 
-    labels = data["Label"]
-    attributes = data["Attributes"].toarray()
-    network = data["Network"].toarray()
+    # labels = data["Label"]
+    # attributes = data["Attributes"].toarray()
+    # network = data["Network"].toarray()
 
     count = 0
     for label in labels:
@@ -84,5 +84,5 @@ def convert(data_source_list):
 
 if __name__ == '__main__':
     data_list = ["Amazon", "Disney", "Enron", "Flickr"]
-    pre_process(data_list[3])
+    pre_process(data_list[2])
     # process_attribute(data_list[3])
