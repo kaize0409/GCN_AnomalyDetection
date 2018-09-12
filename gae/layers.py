@@ -103,6 +103,20 @@ class GraphConvolutionSparse(Layer):
         outputs = self.act(x)
         return outputs
 
+class FullyConnectedDecoder(Layer):
+    def __init__(self, input_dim, output_dim, adj, dropout=0., act=tf.nn.relu, **kwargs):
+        super(FullyConnectedDecoder, self).__init__(**kwargs)
+        with tf.variable_scope(self.name + '_vars'):
+            self.vars['weights'] = weight_variable_glorot(input_dim, output_dim, name="weights")
+        self.dropout = dropout
+        self.act = act
+
+    def _call(self, inputs):
+        x = inputs
+        x = tf.nn.dropout(x, 1 - self.dropout)
+        outputs = tf.matmul(x, self.vars['weights'])
+        return outputs
+
 
 class InnerProductDecoder(Layer):
     """Decoder model layer for link prediction."""

@@ -1,4 +1,4 @@
-from layers import GraphConvolution, GraphConvolutionSparse, InnerProductDecoder
+from layers import GraphConvolution, GraphConvolutionSparse, InnerProductDecoder, FullyConnectedDecoder
 import tensorflow as tf
 
 flags = tf.app.flags
@@ -69,14 +69,14 @@ class GCNModelAE(Model):
         # self.z_mean = self.embeddings
 
         # decoder
-        self.decoder_layer1 = GraphConvolution(input_dim=FLAGS.hidden2,
+        self.decoder_layer1 = FullyConnectedDecoder(input_dim=FLAGS.hidden2,
                                            output_dim=FLAGS.hidden1,
                                            adj=self.adj,
                                            act=tf.nn.relu,
                                            dropout=self.dropout,
                                            logging=self.logging)(self.embeddings)
 
-        self.decoder_layer2 = GraphConvolution(input_dim=FLAGS.hidden1,
+        self.decoder_layer2 = FullyConnectedDecoder(input_dim=FLAGS.hidden1,
                                                output_dim=self.input_dim,
                                                adj=self.adj,
                                                act=tf.nn.sigmoid,
