@@ -8,6 +8,7 @@ import tensorflow as tf
 from constructor import get_placeholder, get_model, get_optimizer, update
 import numpy as np
 from input_data import format_data
+from sklearn.metrics import roc_auc_score
 
 # Settings
 flags = tf.app.flags
@@ -51,3 +52,10 @@ class AnomalyDetectionRunner():
         with open('output/{}-ranking.txt'.format(self.data_name), 'w') as f:
             for index in sorted_errors:
                 f.write("%s\n" % feas['labels'][index][0])
+
+        y_true = [label[0] for label in feas['labels']]
+        auc = roc_auc_score(y_true, reconstruction_errors)
+        print(auc)
+
+
+
