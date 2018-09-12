@@ -6,10 +6,10 @@ from sklearn import preprocessing
 
 
 def process_attribute(data_source):
-    data = scipy.io.loadmat("../Data/" + data_source + ".mat")
+    data = scipy.io.loadmat("data/{}.mat".format(data_source))
 
     labels = data["Label"]
-    attributes = data["Attributes"].toarray()
+    attributes = data["Attributes"]
     network = data["Network"].toarray()
 
     pca = PCA(n_components=20)
@@ -24,9 +24,13 @@ def process_attribute(data_source):
 
 def pre_process(data_source):
     data = scipy.io.loadmat("raw_data/{}.mat".format(data_source))
-    labels = data["gnd"]
-    network = data["A"]
-    attributes = data["X"]
+    # labels = data["gnd"]
+    # network = data["A"]
+    # attributes = data["X"]
+
+    labels = data["Label"]
+    attributes = data["Attributes"].toarray()
+    network = data["Network"].toarray()
 
     count = 0
     for label in labels:
@@ -79,5 +83,6 @@ def convert(data_source_list):
 
 
 if __name__ == '__main__':
-    data_list = ["Amazon", "Disney", "Enron"]
-    pre_process(data_list[2])
+    data_list = ["Amazon", "Disney", "Enron", "Flickr"]
+    pre_process(data_list[3])
+    # process_attribute(data_list[3])
