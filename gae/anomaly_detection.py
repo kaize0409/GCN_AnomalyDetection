@@ -26,6 +26,7 @@ class AnomalyDetectionRunner():
         model_str = self.model
         # load data
         feas = format_data(self.data_name)
+        print("feature number: {}".format(feas['num_features']))
 
         # Define placeholders
         placeholders = get_placeholder()
