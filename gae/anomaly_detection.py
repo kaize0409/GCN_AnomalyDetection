@@ -47,16 +47,20 @@ class AnomalyDetectionRunner():
         for epoch in range(self.iteration):
 
             reconstruction_errors, reconstruction_loss = update(gcn_model, opt, sess, feas['adj_norm'], feas['adj_label'], feas['features'], placeholders, feas['adj'])
-            print("Epoch:", '%04d' % (epoch + 1), "train_loss=", "{:.5f}".format(reconstruction_loss))
+            if epoch % 10 == 0:
+                print("Epoch:", '%04d' % (epoch + 1), "train_loss=", "{:.5f}".format(reconstruction_loss))
+
+            if epoch % 100 == 0:
+                y_true = [label[0] for label in feas['labels']]
+                auc = roc_auc_score(y_true, reconstruction_errors)
+                print(auc)
 
         sorted_errors = np.argsort(-reconstruction_errors, axis=0)
         with open('output/{}-ranking.txt'.format(self.data_name), 'w') as f:
             for index in sorted_errors:
                 f.write("%s\n" % feas['labels'][index][0])
 
-        y_true = [label[0] for label in feas['labels']]
-        auc = roc_auc_score(y_true, reconstruction_errors)
-        print(auc)
+
 
 
 
