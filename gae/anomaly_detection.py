@@ -44,7 +44,7 @@ class AnomalyDetectionRunner():
         val_roc_score = []
 
         # Train model
-        for epoch in range(self.iteration):
+        for epoch in range(1, self.iteration+1):
 
             reconstruction_errors, reconstruction_loss = update(gcn_model, opt, sess, feas['adj_norm'], feas['adj_label'], feas['features'], placeholders, feas['adj'])
             if epoch % 10 == 0:
