@@ -84,5 +84,5 @@ def convert(data_source_list):
 
 if __name__ == '__main__':
     data_list = ["Amazon", "Disney", "Enron", "Flickr"]
-    pre_process(data_list[1])
+    pre_process(data_list[2])
     # process_attribute(data_list[3])
