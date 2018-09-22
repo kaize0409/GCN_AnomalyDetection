@@ -14,7 +14,7 @@ class OptimizerAE(object):
         self.attribute_cost = tf.reduce_mean(self.attribute_reconstruction_errors)
 
         # structure reconstruction loss
-        diff_structure = tf.square(preds_attribute - labels_attribute)
+        diff_structure = tf.square(preds_structure - labels_structure)
 
         self.structure_reconstruction_errors = tf.sqrt(tf.reduce_sum(diff_structure, 1))
         self.structure_cost = tf.reduce_mean(self.structure_reconstruction_errors)
