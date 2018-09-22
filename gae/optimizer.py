@@ -8,18 +8,20 @@ class OptimizerAE(object):
     def __init__(self, preds_attribute, labels_attribute, preds_structure, labels_structure, alpha):
 
         # attribute reconstruction loss
-        diff = tf.square(preds_attribute - labels_attribute)
-        self.attribute_reconstruction_errors = tf.sqrt(tf.reduce_sum(diff, 1))
+        diff_attribute = tf.square(preds_attribute - labels_attribute)
+        self.attribute_reconstruction_errors = tf.sqrt(tf.reduce_sum(diff_attribute, 1))
         # self.reconstruction_errors =  tf.losses.mean_squared_error(labels= labels, predictions=preds)
         self.attribute_cost = tf.reduce_mean(self.attribute_reconstruction_errors)
 
         # structure reconstruction loss
-        self.structure_reconstruction_errors = tf.nn.sigmoid_cross_entropy_with_logits(logits=preds_structure, labels=labels_structure)
-        self.stucture_cost = tf.reduce_mean(self.structure_reconstruction_errors)
+        diff_structure = tf.square(preds_attribute - labels_attribute)
+
+        self.structure_reconstruction_errors = tf.sqrt(tf.reduce_sum(diff_structure, 1))
+        self.structure_cost = tf.reduce_mean(self.structure_reconstruction_errors)
 
 
         self.reconstruction_errors = tf.multiply(alpha, self.attribute_reconstruction_errors) + tf.multiply(1-alpha, self.structure_reconstruction_errors)
-        self.cost = alpha * self.attribute_cost + (1-alpha) * self.stucture_cost
+        self.cost = alpha * self.attribute_cost + (1-alpha) * self.structure_cost
 
         self.optimizer = tf.train.AdamOptimizer(learning_rate=FLAGS.learning_rate)  # Adam Optimizer
         self.opt_op = self.optimizer.minimize(self.cost)
