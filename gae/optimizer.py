@@ -18,7 +18,7 @@ class OptimizerAE(object):
         self.stucture_cost = tf.reduce_mean(self.structure_reconstruction_errors)
 
 
-        self.reconstruction_errors = alpha * self.attribute_reconstruction_errors + (1-alpha) * self.structure_reconstruction_errors
+        self.reconstruction_errors = tf.multiply(alpha, self.attribute_reconstruction_errors) + tf.multiply(1-alpha, self.structure_reconstruction_errors)
         self.cost = alpha * self.attribute_cost + (1-alpha) * self.stucture_cost
 
         self.optimizer = tf.train.AdamOptimizer(learning_rate=FLAGS.learning_rate)  # Adam Optimizer
