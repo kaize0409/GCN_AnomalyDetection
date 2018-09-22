@@ -48,7 +48,7 @@ class AnomalyDetectionRunner():
 
             reconstruction_errors, reconstruction_loss = update(gcn_model, opt, sess, feas['adj_norm'], feas['adj_label'], feas['features'], placeholders, feas['adj'])
             if epoch % 10 == 0:
-                print("Epoch:", '%04d' % (epoch + 1), "train_loss=", "{:.5f}".format(reconstruction_loss))
+                print("Epoch:", '%04d' % (epoch), "train_loss=", "{:.5f}".format(reconstruction_loss))
 
             if epoch % 100 == 0:
                 y_true = [label[0] for label in feas['labels']]
