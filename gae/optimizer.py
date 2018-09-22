@@ -5,13 +5,19 @@ FLAGS = flags.FLAGS
 
 
 class OptimizerAE(object):
-    def __init__(self, preds, labels):
+    def __init__(self, preds_attribute, labels_attribute, preds_structure, labels_structure, alpha):
 
-        # reconstruction loss
-        diff = tf.square(preds - labels)
-        self.reconstruction_errors = tf.reduce_sum(diff, 1)
+        # attribute reconstruction loss
+        diff = tf.square(preds_attribute - labels_attribute)
+        self.reconstruction_errors = tf.sqrt(tf.reduce_sum(diff, 1))
         # self.reconstruction_errors =  tf.losses.mean_squared_error(labels= labels, predictions=preds)
-        self.cost = tf.reduce_mean(self.reconstruction_errors)
+        self.attribute_cost = tf.reduce_mean(self.reconstruction_errors)
+
+        # structure reconstruction loss
+        self.stucture_cost = tf.reduce_mean(
+            tf.nn.sigmoid_cross_entropy_with_logits(logits=preds_structure, labels=labels_structure))
+
+        self.cost = alpha * self.attribute_cost + (1- alpha) * self.stucture_cost
 
         self.optimizer = tf.train.AdamOptimizer(learning_rate=FLAGS.learning_rate)  # Adam Optimizer
         self.opt_op = self.optimizer.minimize(self.cost)

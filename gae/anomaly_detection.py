@@ -35,7 +35,7 @@ class AnomalyDetectionRunner():
         gcn_model = get_model(model_str, placeholders, feas['num_features'], feas['num_nodes'], feas['features_nonzero'])
 
         # Optimizer
-        opt = get_optimizer(model_str, gcn_model, placeholders, feas['num_nodes'])
+        opt = get_optimizer(model_str, gcn_model, placeholders, feas['num_nodes'], FLAGS.alpha)
 
         # Initialize session
         sess = tf.Session()

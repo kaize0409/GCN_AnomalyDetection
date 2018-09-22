@@ -68,24 +68,37 @@ class GCNModelAE(Model):
                                            logging=self.logging)(self.hidden1)
         # self.z_mean = self.embeddings
 
-        # decoder
-        self.decoder_layer1 = GraphConvolution(input_dim=FLAGS.hidden2,
+        # decoder1
+        self.attribute_decoder_layer1 = GraphConvolution(input_dim=FLAGS.hidden2,
                                            output_dim=FLAGS.hidden1,
                                            adj=self.adj,
                                            act=tf.nn.relu,
                                            dropout=self.dropout,
                                            logging=self.logging)(self.embeddings)
 
-        self.decoder_layer2 = GraphConvolution(input_dim=FLAGS.hidden1,
+        self.attribute_decoder_layer2 = GraphConvolution(input_dim=FLAGS.hidden1,
                                                output_dim=self.input_dim,
                                                adj=self.adj,
                                                act=tf.nn.relu,
                                                dropout=self.dropout,
-                                               logging=self.logging)(self.decoder_layer1)
-        self.reconstructions = self.decoder_layer2
-        # self.reconstructions = InnerProductDecoder(input_dim=FLAGS.hidden2,
-        #                               act=lambda x: x,
-        #                               logging=self.logging)(self.embeddings)
+                                               logging=self.logging)(self.attribute_decoder_layer1)
+
+        # decoder2
+        self.structure_decoder_layer1 = GraphConvolution(input_dim=FLAGS.hidden2,
+                                           output_dim=FLAGS.hidden1,
+                                           adj=self.adj,
+                                           act=tf.nn.relu,
+                                           dropout=self.dropout,
+                                           logging=self.logging)(self.embeddings)
+
+        self.structure_decoder_layer2 = InnerProductDecoder(input_dim=FLAGS.hidden1,
+                                        act=lambda x: x,
+                                        logging=self.logging)(self.structure_decoder_layer1)
+
+
+        self.attribute_reconstructions = self.attribute_decoder_layer2
+        self.structure_reconstructions = self.structure_decoder_layer2
+
 
 
 class GCNModelVAE(Model):
