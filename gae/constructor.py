@@ -31,8 +31,7 @@ def get_optimizer(model_str, model, placeholders, num_nodes, alpha):
         opt = OptimizerAE(preds_attribute=model.attribute_reconstructions,
                           labels_attribute=tf.sparse_tensor_to_dense(placeholders['features']),
                           preds_structure=model.structure_reconstructions,
-                          labels_structure=tf.reshape(tf.sparse_tensor_to_dense(placeholders['adj'],
-                                                                      validate_indices=False), [-1]), alpha=alpha)
+                          labels_structure=tf.sparse_tensor_to_dense(placeholders['adj'], validate_indices=False), alpha=alpha)
     elif model_str == 'gcn_vae':
         opt = OptimizerVAE(preds=model.reconstructions,
                            labels=placeholders['features'],
