@@ -28,7 +28,7 @@ np.random.seed(seed)
 tf.set_random_seed(seed)
 
 data_list = ['BlogCatalog', 'Flickr', 'Amazon', 'Enron', 'Disney']
-dataname = data_list[4]       # 'cora' or 'citeseer' or 'pubmed'
+dataname = data_list[3]       # 'cora' or 'citeseer' or 'pubmed'
 model = 'gcn_ae'          # 'arga_ae' or 'arga_vae'
 task = 'anomaly_detection'         # 'clustering' or 'link_prediction'
 settings = {'data_name': dataname, 'iterations' : FLAGS.iterations, 'model' : model}
