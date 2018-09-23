@@ -92,7 +92,7 @@ class GCNModelAE(Model):
                                            logging=self.logging)(self.embeddings)
 
         self.structure_decoder_layer2 = InnerProductDecoder(input_dim=FLAGS.hidden1,
-                                        act=lambda x: x,
+                                        act=tf.nn.sigmoid,
                                         logging=self.logging)(self.structure_decoder_layer1)
 
 
