@@ -8,7 +8,8 @@ import tensorflow as tf
 from constructor import get_placeholder, get_model, get_optimizer, update
 import numpy as np
 from input_data import format_data
-from sklearn.metrics import roc_auc_score
+from sklearn.metrics import roc_auc_score, average_precision_score
+import pandas as pd
 
 # Settings
 flags = tf.app.flags
@@ -60,6 +61,9 @@ class AnomalyDetectionRunner():
             for index in sorted_errors:
                 f.write("%s\n" % feas['labels'][index][0])
 
+	df = pd.DataFrame({'AD-GCA':reconstruction_errors})
+	df.to_csv('output/{}-scores.csv'.format(self.data_name), index=False, sep=',')
+	
 
 
 
