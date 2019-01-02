@@ -9,7 +9,7 @@ Please cite our paper if you use this code in your own work:
 @article{ding2019deep,
   title={Deep Anomaly Detection on Attributed Networks},
   author={Ding, Kaize and Li, Jundong and Bhanushali, Rohit and Liu, Huan},
-  journal={NIPS Workshop on Bayesian Deep Learning},
+  booktitle={SDM},
   year={2019}
 }
 ```
