@@ -42,8 +42,6 @@ class AnomalyDetectionRunner():
         sess = tf.Session()
         sess.run(tf.global_variables_initializer())
 
-        val_roc_score = []
-
         # Train model
         for epoch in range(1, self.iteration+1):
 
