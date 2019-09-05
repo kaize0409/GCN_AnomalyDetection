@@ -10,7 +10,7 @@ python==2.7.3
 tensorflow>=1.1.0
 
 ## Usage
-python run.py
+```python run.py```
 
 ## Cite
 
