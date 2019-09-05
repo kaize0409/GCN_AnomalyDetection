@@ -1,6 +1,16 @@
 Deep Anomaly Detection on Attributed Networks(SDM2019)
 ============
 
+## Dominant
+This is the source code of paper "[Deep Anomaly Detection on Attributed Networks]"(http://www.public.asu.edu/~kding9/pdf/SDM2019_Deep.pdf).
+
+## Requirements
+python==2.7.3
+tensorflow>=1.1.0
+
+## Usage
+python run.py
+
 ## Cite
 
 Please cite our paper if you use this code in your own work:
