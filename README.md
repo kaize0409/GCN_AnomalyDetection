@@ -1,8 +1,8 @@
 Deep Anomaly Detection on Attributed Networks(SDM2019)
 ============
 
-## Dominant
-(framework.pdf)
+## [Dominant](framework.pdf)
+
 This is the source code of paper "[Deep Anomaly Detection on Attributed Networks](http://www.public.asu.edu/~kding9/pdf/SDM2019_Deep.pdf)".
 
 ## Requirements
