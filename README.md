@@ -27,3 +27,6 @@ Please cite our paper if you use this code in your own work:
   year={2019}
 }
 ```
+## Update
+
+A new PyTorch version of the code can be accessed from https://github.com/kaize0409/GCN_AnomalyDetection_pytorch
